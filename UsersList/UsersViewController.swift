@@ -11,15 +11,11 @@ public final class UsersViewController: UITableViewController {
 	public typealias UsersDataSource = UITableViewDiffableDataSource<UsersFeedSection, UserViewModel>
 	public typealias UsersSnapshot = NSDiffableDataSourceSnapshot<UsersFeedSection, UserViewModel>
 
-	weak var coordinator: MainCoordinator?
+	var didSelect: ((UserViewModel) -> Void)?
 	var imageLoader: RemoteImageLoader?
 	var usersLoader: RemoteFeedLoader?
 
-	private var model = UsersCollection() {
-		didSet {
-			self.applySnapshot(items: usersLoader?.map(model) ?? [], animatingDifferences: true)
-		}
-	}
+	private var model = UsersCollection()
 
 	public lazy var diffDataSource = makeDataSource()
 
@@ -79,6 +75,7 @@ public final class UsersViewController: UITableViewController {
 			guard let self = self else { return }
 			if let users = try? result.get() {
 				self.model = users
+				self.applySnapshot(items: users.map(UserViewModel.init), animatingDifferences: true)
 			}
 			self.pullRefreshControl.endRefreshing()
 		})
@@ -86,5 +83,8 @@ public final class UsersViewController: UITableViewController {
 
 	public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
+		if let user = diffDataSource.itemIdentifier(for: indexPath) {
+			self.didSelect?(user)
+		}
 	}
 }

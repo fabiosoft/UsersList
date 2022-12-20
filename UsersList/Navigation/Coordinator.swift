@@ -24,11 +24,20 @@ class MainCoordinator: Coordinator {
 	}
 
 	func start() {
+		let feed = feedUsersVC()
+		navigationController.pushViewController(feed, animated: false)
+	}
+
+	private func feedUsersVC() -> UsersViewController {
 		let session = URLSession(configuration: .ephemeral)
 		let service = NetworkService(session: session)
 		let imageLoader = UsersImageLoader(client: service)
 		let usersLoader = UsersLoader(service)
 		let feed = UsersUIComposer.usersController(withImageLoader: imageLoader, usersLoader: usersLoader)
-		navigationController.pushViewController(feed, animated: false)
+		feed.didSelect = { [weak self] user in
+			guard let _ = self else { return }
+			//no-op
+		}
+		return feed
 	}
 }
