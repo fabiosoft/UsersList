@@ -99,6 +99,7 @@ final class UsersViewControllerTests: XCTestCase {
 			let surname = user.name?.last
 			let completeName = "\(name!) \(surname!)"
 			XCTAssertEqual(completeName, view?.userName, "expected view controller to configure cell with \(completeName), got \(view?.userName ?? "") instead", file: file, line: line)
+            XCTAssertEqual(user.email, view?.email, "expected view controller to configure cell with \(String(describing: user.email)), got \(view?.email ?? "") instead", file: file, line: line)
 		}
 	}
 
@@ -172,10 +173,10 @@ private extension UsersViewController {
 		return tableView.numberOfRows(inSection: 0)
 	}
 
-	func userView(at row: Int) -> UITableViewCell? {
+	func userView(at row: Int) -> UserCell? {
 		let index = IndexPath(row: row, section: 0)
 		let item = self.diffDataSource.itemIdentifier(for: index)!
-		return self.cellProvider(tableView, index, item)
+		return self.cellProvider(tableView, index, item) as? UserCell
 	}
 
 	var isShowingLoadingIndicator: Bool {
@@ -183,9 +184,13 @@ private extension UsersViewController {
 	}
 }
 
-private extension UITableViewCell {
+private extension UserCell {
 	var userName: String? {
-		return textLabel?.text
+		return userLabel.text
+	}
+
+	var email: String? {
+		return emailLabel.text
 	}
 }
 
