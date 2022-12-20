@@ -39,7 +39,54 @@ final class UsersViewControllerTests: XCTestCase {
 		XCTAssertFalse(sut.isShowingLoadingIndicator, "expected to hide loading indicator when reloading completes")
 	}
 
+	func test_loadCompletion_rendersSuccessfullyLoadedCountries() {
+		let user0 = makeUser()
+		let user1 = makeUser()
+		let user2 = makeUser()
+
+		let pageWithoutCountries = makePage([])
+		let pageWithOneCountry = makePage([user0])
+		let pageWithThreeCountries = makePage([user0, user1, user2])
+
+		let (loader, sut) = makeSUT()
+
+		sut.loadViewIfNeeded()
+		assertThat(sut, isRendering: pageWithoutCountries)
+
+		loader.completeLoading(with: pageWithOneCountry, at: 0)
+		assertThat(sut, isRendering: pageWithOneCountry)
+
+		sut.triggerReloading()
+		loader.completeLoading(with: pageWithThreeCountries, at: 1)
+		assertThat(sut, isRendering: pageWithThreeCountries)
+
+		sut.triggerReloading()
+		loader.completeLoadingWithError(at: 2)
+		assertThat(sut, isRendering: pageWithThreeCountries)
+	}
+
 	// MARK: - Helpers
+
+	private func assertThat(_ sut: UsersViewController, isRendering users: UsersCollection, file: StaticString = #filePath, line: UInt = #line) {
+		XCTAssertEqual(users.count, sut.numberOfRenderedUsers(), "expected view controller to render \(users.count) cells, got \(sut.numberOfRenderedUsers()) instead", file: file, line: line)
+
+		users.enumerated().forEach { idx, user in
+			let view = sut.userView(at: idx)
+			XCTAssertNotNil(view, "expected view controller to render view with \(user)", file: file, line: line)
+			let name = user.name?.first?.capitalized
+			let surname = user.name?.last
+			let completeName = "\(name!) \(surname!)"
+			XCTAssertEqual(completeName, view?.userName, "expected view controller to configure cell with \(completeName), got \(view?.userName ?? "") instead", file: file, line: line)
+		}
+	}
+
+	private func makePage(_ users: [User]) -> UsersCollection {
+		return users
+	}
+
+	private func makeUser(name: String = "any user name", surname: String = "any surname", flagURL url: URL = URL(string: "http://a-user-url.com")!) -> User {
+		User(name: Name(title: nil, first: name, last: surname), email: nil, id: ID(name: UUID().uuidString, value: UUID().uuidString), picture: Picture(large: url.absoluteString, medium: url.absoluteString, thumbnail: url.absoluteString))
+	}
 
 	private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (loader: UsersFeedLoaderSpy, sut: UsersViewController) {
 		let loader = UsersFeedLoaderSpy()
@@ -51,6 +98,10 @@ final class UsersViewControllerTests: XCTestCase {
 }
 
 class UsersFeedLoaderSpy: RemoteFeedLoader, RemoteImageLoader {
+	func map(_ userCollection: UsersList.UsersCollection) -> [UsersList.UserViewModel] {
+		userCollection.map(UserViewModel.init)
+	}
+
 	// MARK: - UsersLoader
 
 	private var feedRequests = [RemoteFeedLoader.Completion]()
@@ -102,6 +153,12 @@ private extension UsersViewController {
 
 	var isShowingLoadingIndicator: Bool {
 		return pullRefreshControl.isRefreshing == true
+	}
+}
+
+private extension UITableViewCell {
+	var userName: String? {
+		return textLabel?.text
 	}
 }
 

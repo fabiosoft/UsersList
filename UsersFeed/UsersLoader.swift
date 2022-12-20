@@ -12,9 +12,14 @@ public protocol RemoteFeedLoader {
 	typealias Completion = (Result) -> Void
 
 	func loadUsers(page: UInt, completion: @escaping Completion)
+	func map(_ usersCollection: UsersCollection) -> [UserViewModel]
 }
 
 public final class UsersLoader: RemoteFeedLoader {
+	public func map(_ usersCollection: UsersCollection) -> [UserViewModel] {
+		usersCollection.map(UserViewModel.init)
+	}
+
 	public enum Error: Swift.Error {
 		case connectivity
 		case invalidData
