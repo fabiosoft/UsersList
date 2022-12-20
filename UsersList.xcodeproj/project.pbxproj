@@ -14,10 +14,10 @@
 		E5B938B129524780005B434E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5B938B029524780005B434E /* Assets.xcassets */; };
 		E5B938B429524780005B434E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B938B229524780005B434E /* LaunchScreen.storyboard */; };
 		E5B938BF29524781005B434E /* UsersListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938BE29524781005B434E /* UsersListTests.swift */; };
-		E5B938DB29524B70005B434E /* UsersListE2ETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938D929524B35005B434E /* UsersListE2ETests.swift */; };
 		E5B938DF29524C46005B434E /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938DE29524C46005B434E /* DataRequest.swift */; };
 		E5B938E129524C89005B434E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938E029524C89005B434E /* NetworkService.swift */; };
 		E5B938E429524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938E329524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift */; };
+		E5B938E5295250FC005B434E /* UsersListE2ETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938D929524B35005B434E /* UsersListE2ETests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -323,7 +323,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5B938BF29524781005B434E /* UsersListTests.swift in Sources */,
-				E5B938DB29524B70005B434E /* UsersListE2ETests.swift in Sources */,
 				E5B938E429524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5B938E5295250FC005B434E /* UsersListE2ETests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
