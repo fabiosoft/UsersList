@@ -24,6 +24,9 @@
 		E5B938FD29525787005B434E /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938E329524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift */; };
 		E5B9390129525E47005B434E /* FeedLoaderMockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B9390029525E47005B434E /* FeedLoaderMockURLProtocol.swift */; };
 		E5B939032952644B005B434E /* UsersImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B939022952644B005B434E /* UsersImageLoader.swift */; };
+		E5B9390629526577005B434E /* UsersViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B9390529526577005B434E /* UsersViewControllerTests.swift */; };
+		E5B939082952665F005B434E /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B939072952665F005B434E /* UsersViewController.swift */; };
+		E5B9390A295266B3005B434E /* UsersUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B93909295266B3005B434E /* UsersUIComposer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,9 @@
 		E5B938F329525772005B434E /* UsersListE2ETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsersListE2ETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B9390029525E47005B434E /* FeedLoaderMockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderMockURLProtocol.swift; sourceTree = "<group>"; };
 		E5B939022952644B005B434E /* UsersImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersImageLoader.swift; sourceTree = "<group>"; };
+		E5B9390529526577005B434E /* UsersViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewControllerTests.swift; sourceTree = "<group>"; };
+		E5B939072952665F005B434E /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
+		E5B93909295266B3005B434E /* UsersUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersUIComposer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,8 @@
 				E5B938B029524780005B434E /* Assets.xcassets */,
 				E5B938B229524780005B434E /* LaunchScreen.storyboard */,
 				E5B938B529524780005B434E /* Info.plist */,
+				E5B939072952665F005B434E /* UsersViewController.swift */,
+				E5B93909295266B3005B434E /* UsersUIComposer.swift */,
 			);
 			path = UsersList;
 			sourceTree = "<group>";
@@ -145,6 +153,7 @@
 		E5B938DC29524BC6005B434E /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				E5B939042952655D005B434E /* UsersAppTests */,
 				E5B938EC295256D5005B434E /* UsersFeedTests */,
 				E5B938E229524CCA005B434E /* Helpers */,
 				E5B938D829524B13005B434E /* UsersListE2ETests */,
@@ -187,6 +196,14 @@
 				E5B9390029525E47005B434E /* FeedLoaderMockURLProtocol.swift */,
 			);
 			path = UsersFeedTests;
+			sourceTree = "<group>";
+		};
+		E5B939042952655D005B434E /* UsersAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				E5B9390529526577005B434E /* UsersViewControllerTests.swift */,
+			);
+			path = UsersAppTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5B9390A295266B3005B434E /* UsersUIComposer.swift in Sources */,
 				E5B938E129524C89005B434E /* NetworkService.swift in Sources */,
 				E5B938E92952518D005B434E /* UsersLoader.swift in Sources */,
 				E5B938AC2952477D005B434E /* ViewController.swift in Sources */,
@@ -349,6 +367,7 @@
 				E5B938AA2952477D005B434E /* SceneDelegate.swift in Sources */,
 				E5B939032952644B005B434E /* UsersImageLoader.swift in Sources */,
 				E5B938DF29524C46005B434E /* DataRequest.swift in Sources */,
+				E5B939082952665F005B434E /* UsersViewController.swift in Sources */,
 				E5B938EB29525266005B434E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5B9390129525E47005B434E /* FeedLoaderMockURLProtocol.swift in Sources */,
+				E5B9390629526577005B434E /* UsersViewControllerTests.swift in Sources */,
 				E5B938BF29524781005B434E /* UsersListTests.swift in Sources */,
 				E5B938EE295256EC005B434E /* UsersFeedTests.swift in Sources */,
 				E5B938E429524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift in Sources */,
