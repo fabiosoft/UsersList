@@ -23,6 +23,7 @@
 		E5B938FC29525781005B434E /* UsersListE2ETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938D929524B35005B434E /* UsersListE2ETests.swift */; };
 		E5B938FD29525787005B434E /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938E329524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift */; };
 		E5B9390129525E47005B434E /* FeedLoaderMockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B9390029525E47005B434E /* FeedLoaderMockURLProtocol.swift */; };
+		E5B939032952644B005B434E /* UsersImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B939022952644B005B434E /* UsersImageLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		E5B938ED295256EC005B434E /* UsersFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFeedTests.swift; sourceTree = "<group>"; };
 		E5B938F329525772005B434E /* UsersListE2ETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsersListE2ETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B9390029525E47005B434E /* FeedLoaderMockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderMockURLProtocol.swift; sourceTree = "<group>"; };
+		E5B939022952644B005B434E /* UsersImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 			children = (
 				E5B938E82952518D005B434E /* UsersLoader.swift */,
 				E5B938EA29525266005B434E /* User.swift */,
+				E5B939022952644B005B434E /* UsersImageLoader.swift */,
 			);
 			path = UsersFeed;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				E5B938AC2952477D005B434E /* ViewController.swift in Sources */,
 				E5B938A82952477D005B434E /* AppDelegate.swift in Sources */,
 				E5B938AA2952477D005B434E /* SceneDelegate.swift in Sources */,
+				E5B939032952644B005B434E /* UsersImageLoader.swift in Sources */,
 				E5B938DF29524C46005B434E /* DataRequest.swift in Sources */,
 				E5B938EB29525266005B434E /* User.swift in Sources */,
 			);
