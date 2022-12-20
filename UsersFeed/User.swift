@@ -11,7 +11,7 @@ import Foundation
 public class Users: Codable {
 	let results: [User]?
 
-	init(results: [User]?) {
+	public init(results: [User]?) {
 		self.results = results
 	}
 }
@@ -23,7 +23,7 @@ public class User: Codable {
 	let id: ID?
 	let picture: Picture?
 
-	init(name: Name?, email: String?, id: ID?, picture: Picture?) {
+	public init(name: Name?, email: String?, id: ID?, picture: Picture?) {
 		self.name = name
 		self.email = email
 		self.id = id
@@ -35,7 +35,7 @@ public class User: Codable {
 public class ID: Codable {
 	let name, value: String?
 
-	init(name: String?, value: String?) {
+	public init(name: String?, value: String?) {
 		self.name = name
 		self.value = value
 	}
@@ -45,7 +45,7 @@ public class ID: Codable {
 public class Name: Codable {
 	let title, first, last: String?
 
-	init(title: String?, first: String?, last: String?) {
+	public init(title: String?, first: String?, last: String?) {
 		self.title = title
 		self.first = first
 		self.last = last
@@ -56,7 +56,7 @@ public class Name: Codable {
 public class Picture: Codable {
 	let large, medium, thumbnail: String?
 
-	init(large: String?, medium: String?, thumbnail: String?) {
+	public init(large: String?, medium: String?, thumbnail: String?) {
 		self.large = large
 		self.medium = medium
 		self.thumbnail = thumbnail
