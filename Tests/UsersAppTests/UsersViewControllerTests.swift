@@ -40,9 +40,9 @@ final class UsersViewControllerTests: XCTestCase {
 	}
 
 	func test_loadCompletion_rendersSuccessfullyLoadedUsers() {
-		let user0 = makeUser()
-		let user1 = makeUser()
-		let user2 = makeUser()
+		let user0 = makeUser(name: UUID().uuidString, surname: UUID().uuidString)
+		let user1 = makeUser(name: UUID().uuidString, surname: UUID().uuidString)
+		let user2 = makeUser(name: UUID().uuidString, surname: UUID().uuidString)
 
 		let pageWithoutUsers = makePage([])
 		let pageWithOneUser = makePage([user0])
@@ -84,7 +84,7 @@ final class UsersViewControllerTests: XCTestCase {
 		return users
 	}
 
-	private func makeUser(name: String = "any user name", surname: String = "any surname", imageURL url: URL = URL(string: "http://a-user-url.com")!) -> User {
+	private func makeUser(name: String, surname: String, imageURL url: URL = URL(string: "http://a-user-url.com")!) -> User {
 		User(name: Name(title: nil, first: name, last: surname), email: nil, id: ID(name: UUID().uuidString, value: UUID().uuidString), picture: Picture(large: url.absoluteString, medium: url.absoluteString, thumbnail: url.absoluteString))
 	}
 

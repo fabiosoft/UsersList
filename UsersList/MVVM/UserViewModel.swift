@@ -38,10 +38,10 @@ public struct UserViewModel {
 
 extension UserViewModel: Hashable {
 	public static func == (lhs: UserViewModel, rhs: UserViewModel) -> Bool {
-		lhs.user.id?.value == rhs.user.id?.value
+		lhs.user.name?.first == rhs.user.name?.first
 	}
 
 	public func hash(into hasher: inout Hasher) {
-		hasher.combine(user.id?.value)
+		hasher.combine(user.name?.first)
 	}
 }
