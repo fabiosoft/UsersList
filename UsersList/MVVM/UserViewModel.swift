@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UsersFeedSection {
+public enum UsersFeedSection {
 	case main
 }
 
@@ -26,6 +26,13 @@ public struct UserViewModel {
 
 	var email: String? {
 		user.email
+	}
+
+	var imageURL: URL? {
+		guard let png = self.user.picture?.medium else {
+			return nil
+		}
+		return URL(string: png)
 	}
 }
 

@@ -27,8 +27,8 @@ public final class UsersImageLoader: RemoteImageLoader {
 	}
 
 	public func loadUserImage(from url: URL, completion: @escaping Completion) {
-		let flagLoaderRequest = LoadUserImageRequest(url: url)
-		client.request(flagLoaderRequest) { [weak self] result in
+		let imageLoaderRequest = LoadUserImageRequest(url: url)
+		client.request(imageLoaderRequest) { [weak self] result in
 			guard let self = self else { return }
 			switch result {
 			case let .success((imageData, response)):

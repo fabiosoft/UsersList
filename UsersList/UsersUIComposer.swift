@@ -12,8 +12,40 @@ public final class UsersUIComposer {
 
 	public static func usersController(withImageLoader: RemoteImageLoader, usersLoader: RemoteFeedLoader) -> UsersViewController {
 		let usersFeedVC = UsersViewController()
-		usersFeedVC.imageLoader = withImageLoader
-		usersFeedVC.usersLoader = usersLoader
+		usersFeedVC.imageLoader = MainQueueDispatchDecorator(decoratee: withImageLoader)
+		usersFeedVC.usersLoader = MainQueueDispatchDecorator(decoratee: usersLoader)
 		return usersFeedVC
+	}
+}
+
+private final class MainQueueDispatchDecorator<T> {
+	private let decoratee: T
+
+	init(decoratee: T) {
+		self.decoratee = decoratee
+	}
+}
+
+extension MainQueueDispatchDecorator: RemoteFeedLoader where T == RemoteFeedLoader {
+	func loadUsers(page: UInt, completion: @escaping RemoteFeedLoader.Completion) {
+		decoratee.loadUsers(page: page) { result in
+			if Thread.isMainThread {
+				completion(result)
+			} else {
+				DispatchQueue.main.async { completion(result) }
+			}
+		}
+	}
+}
+
+extension MainQueueDispatchDecorator: RemoteImageLoader where T == RemoteImageLoader {
+	func loadUserImage(from url: URL, completion: @escaping RemoteImageLoader.Completion) {
+		decoratee.loadUserImage(from: url) { result in
+			if Thread.isMainThread {
+				completion(result)
+			} else {
+				DispatchQueue.main.async { completion(result) }
+			}
+		}
 	}
 }

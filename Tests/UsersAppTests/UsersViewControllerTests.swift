@@ -39,30 +39,30 @@ final class UsersViewControllerTests: XCTestCase {
 		XCTAssertFalse(sut.isShowingLoadingIndicator, "expected to hide loading indicator when reloading completes")
 	}
 
-	func test_loadCompletion_rendersSuccessfullyLoadedCountries() {
+	func test_loadCompletion_rendersSuccessfullyLoadedUsers() {
 		let user0 = makeUser()
 		let user1 = makeUser()
 		let user2 = makeUser()
 
-		let pageWithoutCountries = makePage([])
-		let pageWithOneCountry = makePage([user0])
-		let pageWithThreeCountries = makePage([user0, user1, user2])
+		let pageWithoutUsers = makePage([])
+		let pageWithOneUser = makePage([user0])
+		let pageWithThreeUsers = makePage([user0, user1, user2])
 
 		let (loader, sut) = makeSUT()
 
 		sut.loadViewIfNeeded()
-		assertThat(sut, isRendering: pageWithoutCountries)
+		assertThat(sut, isRendering: pageWithoutUsers)
 
-		loader.completeLoading(with: pageWithOneCountry, at: 0)
-		assertThat(sut, isRendering: pageWithOneCountry)
+		loader.completeLoading(with: pageWithOneUser, at: 0)
+		assertThat(sut, isRendering: pageWithOneUser)
 
 		sut.triggerReloading()
-		loader.completeLoading(with: pageWithThreeCountries, at: 1)
-		assertThat(sut, isRendering: pageWithThreeCountries)
+		loader.completeLoading(with: pageWithThreeUsers, at: 1)
+		assertThat(sut, isRendering: pageWithThreeUsers)
 
 		sut.triggerReloading()
 		loader.completeLoadingWithError(at: 2)
-		assertThat(sut, isRendering: pageWithThreeCountries)
+		assertThat(sut, isRendering: pageWithThreeUsers)
 	}
 
 	// MARK: - Helpers
@@ -84,7 +84,7 @@ final class UsersViewControllerTests: XCTestCase {
 		return users
 	}
 
-	private func makeUser(name: String = "any user name", surname: String = "any surname", flagURL url: URL = URL(string: "http://a-user-url.com")!) -> User {
+	private func makeUser(name: String = "any user name", surname: String = "any surname", imageURL url: URL = URL(string: "http://a-user-url.com")!) -> User {
 		User(name: Name(title: nil, first: name, last: surname), email: nil, id: ID(name: UUID().uuidString, value: UUID().uuidString), picture: Picture(large: url.absoluteString, medium: url.absoluteString, thumbnail: url.absoluteString))
 	}
 
@@ -129,7 +129,12 @@ class UsersFeedLoaderSpy: RemoteFeedLoader, RemoteImageLoader {
 		feedRequests[index](.failure(error))
 	}
 
-	func loadUserImage(from url: URL, completion: @escaping RemoteImageLoader.Completion) {}
+	// MARK: - ImageLoader
+
+	private(set) var loadedImageURLs = [URL]()
+	func loadUserImage(from url: URL, completion: @escaping RemoteImageLoader.Completion) {
+		loadedImageURLs.append(url)
+	}
 }
 
 private extension UsersViewController {
@@ -146,9 +151,9 @@ private extension UsersViewController {
 	}
 
 	func userView(at row: Int) -> UITableViewCell? {
-		let datasource = tableView.dataSource
 		let index = IndexPath(row: row, section: 0)
-		return datasource?.tableView(tableView, cellForRowAt: index)
+		let item = self.diffDataSource.itemIdentifier(for: index)!
+		return self.cellProvider(tableView, index, item)
 	}
 
 	var isShowingLoadingIndicator: Bool {
