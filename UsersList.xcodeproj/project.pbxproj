@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E5621C8F295279B5002913E3 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5621C8E295279B4002913E3 /* Coordinator.swift */; };
 		E5B938A82952477D005B434E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938A72952477D005B434E /* AppDelegate.swift */; };
 		E5B938B129524780005B434E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5B938B029524780005B434E /* Assets.xcassets */; };
 		E5B938B429524780005B434E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B938B229524780005B434E /* LaunchScreen.storyboard */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E5621C8E295279B4002913E3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E5B938A42952477D005B434E /* UsersList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UsersList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B938A72952477D005B434E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5B938B029524780005B434E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -95,6 +97,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E5621C8D295279A8002913E3 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				E5621C8E295279B4002913E3 /* Coordinator.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		E5B9389B2952477D005B434E = {
 			isa = PBXGroup;
 			children = (
@@ -119,7 +129,8 @@
 		E5B938A62952477D005B434E /* UsersList */ = {
 			isa = PBXGroup;
 			children = (
-				E5B9390D29526AF9005B434E /* MVVM */,
+				E5621C8D295279A8002913E3 /* Navigation */,
+				E5B9390D29526AF9005B434E /* Domain */,
 				E5B938A72952477D005B434E /* AppDelegate.swift */,
 				E5B938B029524780005B434E /* Assets.xcassets */,
 				E5B938B229524780005B434E /* LaunchScreen.storyboard */,
@@ -203,12 +214,12 @@
 			path = UsersAppTests;
 			sourceTree = "<group>";
 		};
-		E5B9390D29526AF9005B434E /* MVVM */ = {
+		E5B9390D29526AF9005B434E /* Domain */ = {
 			isa = PBXGroup;
 			children = (
 				E5B9390E29526B05005B434E /* UserViewModel.swift */,
 			);
-			path = MVVM;
+			path = Domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,6 +380,7 @@
 				E5B938E92952518D005B434E /* UsersLoader.swift in Sources */,
 				E5B938A82952477D005B434E /* AppDelegate.swift in Sources */,
 				E5B939032952644B005B434E /* UsersImageLoader.swift in Sources */,
+				E5621C8F295279B5002913E3 /* Coordinator.swift in Sources */,
 				E5B938DF29524C46005B434E /* DataRequest.swift in Sources */,
 				E5B939082952665F005B434E /* UsersViewController.swift in Sources */,
 				E5B9390C295269C1005B434E /* UserCell.swift in Sources */,

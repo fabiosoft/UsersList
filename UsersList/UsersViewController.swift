@@ -11,6 +11,7 @@ public final class UsersViewController: UITableViewController {
 	public typealias UsersDataSource = UITableViewDiffableDataSource<UsersFeedSection, UserViewModel>
 	public typealias UsersSnapshot = NSDiffableDataSourceSnapshot<UsersFeedSection, UserViewModel>
 
+	weak var coordinator: MainCoordinator?
 	var imageLoader: RemoteImageLoader?
 	var usersLoader: RemoteFeedLoader?
 

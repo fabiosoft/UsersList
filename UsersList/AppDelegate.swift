@@ -10,15 +10,15 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
+	var coordinator: MainCoordinator?
+
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-		let session = URLSession(configuration: .ephemeral)
-		let service = NetworkService(session: session)
-		let imageloader = UsersImageLoader(client: service)
-		let usersLoader = UsersLoader(service)
-		let feed = UsersUIComposer.usersController(withImageLoader: imageloader, usersLoader: usersLoader)
-		let nav = UINavigationController(rootViewController: feed)
+		let navController = UINavigationController()
+		coordinator = MainCoordinator(navigationController: navController)
+		coordinator?.start()
+
 		window = UIWindow(frame: UIScreen.main.bounds)
-		window?.rootViewController = nav
+		window?.rootViewController = navController
 		window?.makeKeyAndVisible()
 		return true
 	}
