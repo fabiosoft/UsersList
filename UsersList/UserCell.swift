@@ -17,6 +17,7 @@ protocol Reusable: NSObject {
 
 class UserCell: UITableViewCell, Reusable {
 	static var reuseIdentifier: String = "UserCell"
+	var imageLoader: RemoteImageLoader?
 
 	var model: UserViewModel? {
 		didSet {
