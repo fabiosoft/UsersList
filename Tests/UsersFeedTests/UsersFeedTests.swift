@@ -9,27 +9,35 @@ import XCTest
 import UsersList
 
 final class UsersFeedTests: XCTestCase {
-	func test_loader_doesNotRequestUrlUponCreation() {
-		let (client, _) = makeSUT()
+	func test_loader_deliversConnectivityErrorOnClientError() {
+		let exp = XCTestExpectation()
 
-		XCTAssertEqual([], client.requestedUrls, "expecting sut not to perform any requests upon creation")
-	}
+		FeedLoaderMockURLProtocol.loadingHandler = { request in
+			let response = HTTPURLResponse(url: request.url!, statusCode: 500, httpVersion: nil, headerFields: nil)!
+			return (response, nil, NetworkError.networkError)
+		}
 
-	func test_loader_requestCorrectUrlEveryTimeIsInvoked() {
-		let (client, sut) = makeSUT()
-
-		sut.loadUsers(page: 1) { _ in }
-		sut.loadUsers(page: 2) { _ in }
-
-		XCTAssertEqual(2, client.requestedUrls.count,
-		               "expecting sut to hit endpoint every time load is invoked"
-		)
+		let (_, sut) = makeSUT()
+		sut.loadUsers { result in
+			switch result {
+			case .success:
+				break
+			case .failure(let error):
+				XCTAssertNotNil(error)
+				XCTAssertEqual(error, NetworkError.networkError)
+			}
+			exp.fulfill()
+		}
+		wait(for: [exp], timeout: 1.0)
 	}
 
 	// MARK: - Helpers
 
-	private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (client: HTTPClientSpy<LoadUsersRequest>, sut: UsersLoader) {
-		let client = HTTPClientSpy<LoadUsersRequest>()
+	private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (client: HTTPClient, sut: UsersLoader) {
+		let config = URLSessionConfiguration.ephemeral
+		config.protocolClasses = [FeedLoaderMockURLProtocol.self]
+		let session = URLSession(configuration: config)
+		let client = NetworkService(session: session)
 		let sut = UsersLoader(client)
 		trackForMemoryLeaks(client, file: file, line: line)
 		trackForMemoryLeaks(sut, file: file, line: line)

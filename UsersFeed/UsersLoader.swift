@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol RemoteFeedLoader {
-	typealias Result = Swift.Result<UsersCollection, Error>
+	typealias Result = Swift.Result<UsersCollection, NetworkError>
 	typealias Completion = (Result) -> Void
 
 	func loadUsers(page: UInt, completion: @escaping Completion)
