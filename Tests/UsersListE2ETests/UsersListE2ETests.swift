@@ -109,7 +109,7 @@ final class UsersListE2ETests: XCTestCase {
 
 	private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> HTTPClient {
 		let session = URLSession(configuration: .ephemeral)
-		let sut = HTTPClient(session: session)
+		let sut = NetworkService(session: session)
 		trackForMemoryLeaks(sut, file: file, line: line)
 		return sut
 	}

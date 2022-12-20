@@ -17,7 +17,12 @@
 		E5B938DF29524C46005B434E /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938DE29524C46005B434E /* DataRequest.swift */; };
 		E5B938E129524C89005B434E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938E029524C89005B434E /* NetworkService.swift */; };
 		E5B938E429524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938E329524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift */; };
-		E5B938E5295250FC005B434E /* UsersListE2ETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938D929524B35005B434E /* UsersListE2ETests.swift */; };
+		E5B938E92952518D005B434E /* UsersLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938E82952518D005B434E /* UsersLoader.swift */; };
+		E5B938EB29525266005B434E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938EA29525266005B434E /* User.swift */; };
+		E5B938EE295256EC005B434E /* UsersFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938ED295256EC005B434E /* UsersFeedTests.swift */; };
+		E5B938FC29525781005B434E /* UsersListE2ETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938D929524B35005B434E /* UsersListE2ETests.swift */; };
+		E5B938FD29525787005B434E /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938E329524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift */; };
+		E5B938FF295257F6005B434E /* HTTPClientSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938FE295257F6005B434E /* HTTPClientSpy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +33,7 @@
 			remoteGlobalIDString = E5B938A32952477D005B434E;
 			remoteInfo = UsersList;
 		};
-		E5B938C529524781005B434E /* PBXContainerItemProxy */ = {
+		E5B938F729525772005B434E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E5B9389C2952477D005B434E /* Project object */;
 			proxyType = 1;
@@ -48,11 +53,15 @@
 		E5B938B529524780005B434E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5B938BA29524781005B434E /* UsersListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsersListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B938BE29524781005B434E /* UsersListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListTests.swift; sourceTree = "<group>"; };
-		E5B938C429524781005B434E /* UsersListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsersListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B938D929524B35005B434E /* UsersListE2ETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListE2ETests.swift; sourceTree = "<group>"; };
 		E5B938DE29524C46005B434E /* DataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequest.swift; sourceTree = "<group>"; };
 		E5B938E029524C89005B434E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E5B938E329524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
+		E5B938E82952518D005B434E /* UsersLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersLoader.swift; sourceTree = "<group>"; };
+		E5B938EA29525266005B434E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E5B938ED295256EC005B434E /* UsersFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFeedTests.swift; sourceTree = "<group>"; };
+		E5B938F329525772005B434E /* UsersListE2ETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsersListE2ETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5B938FE295257F6005B434E /* HTTPClientSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientSpy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +79,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E5B938C129524781005B434E /* Frameworks */ = {
+		E5B938F029525772005B434E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -83,6 +92,7 @@
 		E5B9389B2952477D005B434E = {
 			isa = PBXGroup;
 			children = (
+				E5B938E629525157005B434E /* UsersFeed */,
 				E5B938DD29524C24005B434E /* Network */,
 				E5B938A62952477D005B434E /* UsersList */,
 				E5B938DC29524BC6005B434E /* Tests */,
@@ -95,7 +105,7 @@
 			children = (
 				E5B938A42952477D005B434E /* UsersList.app */,
 				E5B938BA29524781005B434E /* UsersListTests.xctest */,
-				E5B938C429524781005B434E /* UsersListUITests.xctest */,
+				E5B938F329525772005B434E /* UsersListE2ETests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,6 +143,7 @@
 		E5B938DC29524BC6005B434E /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				E5B938EC295256D5005B434E /* UsersFeedTests */,
 				E5B938E229524CCA005B434E /* Helpers */,
 				E5B938D829524B13005B434E /* UsersListE2ETests */,
 				E5B938BD29524781005B434E /* UsersListTests */,
@@ -155,6 +166,24 @@
 				E5B938E329524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E5B938E629525157005B434E /* UsersFeed */ = {
+			isa = PBXGroup;
+			children = (
+				E5B938E82952518D005B434E /* UsersLoader.swift */,
+				E5B938EA29525266005B434E /* User.swift */,
+			);
+			path = UsersFeed;
+			sourceTree = "<group>";
+		};
+		E5B938EC295256D5005B434E /* UsersFeedTests */ = {
+			isa = PBXGroup;
+			children = (
+				E5B938ED295256EC005B434E /* UsersFeedTests.swift */,
+				E5B938FE295257F6005B434E /* HTTPClientSpy.swift */,
+			);
+			path = UsersFeedTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,23 +225,23 @@
 			productReference = E5B938BA29524781005B434E /* UsersListTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E5B938C329524781005B434E /* UsersListUITests */ = {
+		E5B938F229525772005B434E /* UsersListE2ETests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E5B938D429524781005B434E /* Build configuration list for PBXNativeTarget "UsersListUITests" */;
+			buildConfigurationList = E5B938F929525772005B434E /* Build configuration list for PBXNativeTarget "UsersListE2ETests" */;
 			buildPhases = (
-				E5B938C029524781005B434E /* Sources */,
-				E5B938C129524781005B434E /* Frameworks */,
-				E5B938C229524781005B434E /* Resources */,
+				E5B938EF29525772005B434E /* Sources */,
+				E5B938F029525772005B434E /* Frameworks */,
+				E5B938F129525772005B434E /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E5B938C629524781005B434E /* PBXTargetDependency */,
+				E5B938F829525772005B434E /* PBXTargetDependency */,
 			);
-			name = UsersListUITests;
-			productName = UsersListUITests;
-			productReference = E5B938C429524781005B434E /* UsersListUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
+			name = UsersListE2ETests;
+			productName = UsersListE2ETests;
+			productReference = E5B938F329525772005B434E /* UsersListE2ETests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -231,7 +260,7 @@
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = E5B938A32952477D005B434E;
 					};
-					E5B938C329524781005B434E = {
+					E5B938F229525772005B434E = {
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = E5B938A32952477D005B434E;
 					};
@@ -252,7 +281,7 @@
 			targets = (
 				E5B938A32952477D005B434E /* UsersList */,
 				E5B938B929524781005B434E /* UsersListTests */,
-				E5B938C329524781005B434E /* UsersListUITests */,
+				E5B938F229525772005B434E /* UsersListE2ETests */,
 			);
 		};
 /* End PBXProject section */
@@ -275,7 +304,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E5B938C229524781005B434E /* Resources */ = {
+		E5B938F129525772005B434E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -311,10 +340,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5B938E129524C89005B434E /* NetworkService.swift in Sources */,
+				E5B938E92952518D005B434E /* UsersLoader.swift in Sources */,
 				E5B938AC2952477D005B434E /* ViewController.swift in Sources */,
 				E5B938A82952477D005B434E /* AppDelegate.swift in Sources */,
 				E5B938AA2952477D005B434E /* SceneDelegate.swift in Sources */,
 				E5B938DF29524C46005B434E /* DataRequest.swift in Sources */,
+				E5B938EB29525266005B434E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,15 +354,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5B938BF29524781005B434E /* UsersListTests.swift in Sources */,
+				E5B938FF295257F6005B434E /* HTTPClientSpy.swift in Sources */,
+				E5B938EE295256EC005B434E /* UsersFeedTests.swift in Sources */,
 				E5B938E429524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E5B938C029524781005B434E /* Sources */ = {
+		E5B938EF29525772005B434E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5B938E5295250FC005B434E /* UsersListE2ETests.swift in Sources */,
+				E5B938FC29525781005B434E /* UsersListE2ETests.swift in Sources */,
+				E5B938FD29525787005B434E /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,10 +377,10 @@
 			target = E5B938A32952477D005B434E /* UsersList */;
 			targetProxy = E5B938BB29524781005B434E /* PBXContainerItemProxy */;
 		};
-		E5B938C629524781005B434E /* PBXTargetDependency */ = {
+		E5B938F829525772005B434E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E5B938A32952477D005B434E /* UsersList */;
-			targetProxy = E5B938C529524781005B434E /* PBXContainerItemProxy */;
+			targetProxy = E5B938F729525772005B434E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -588,39 +622,39 @@
 			};
 			name = Release;
 		};
-		E5B938D529524781005B434E /* Debug */ = {
+		E5B938FA29525772005B434E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q78LKWJ5MC;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fabiosoft.UsersListUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fabiosoft.UsersListE2ETests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = UsersList;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UsersList.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UsersList";
 			};
 			name = Debug;
 		};
-		E5B938D629524781005B434E /* Release */ = {
+		E5B938FB29525772005B434E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q78LKWJ5MC;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fabiosoft.UsersListUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fabiosoft.UsersListE2ETests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = UsersList;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UsersList.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UsersList";
 			};
 			name = Release;
 		};
@@ -654,11 +688,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E5B938D429524781005B434E /* Build configuration list for PBXNativeTarget "UsersListUITests" */ = {
+		E5B938F929525772005B434E /* Build configuration list for PBXNativeTarget "UsersListE2ETests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E5B938D529524781005B434E /* Debug */,
-				E5B938D629524781005B434E /* Release */,
+				E5B938FA29525772005B434E /* Debug */,
+				E5B938FB29525772005B434E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -13,11 +13,11 @@ public enum NetworkError: Error {
 	case malformedData
 }
 
-public protocol NetworkService {
+public protocol HTTPClient {
 	func request<Request: DataRequest>(_ request: Request, completion: @escaping (Result<(Request.Response, HTTPURLResponse), NetworkError>) -> Void)
 }
 
-final public class HTTPClient: NetworkService {
+final public class NetworkService: HTTPClient {
 	private var session: URLSession
 
 	public init(session: URLSession = URLSession.shared) {
@@ -50,5 +50,21 @@ final public class HTTPClient: NetworkService {
 			}
 		}
 		task.resume()
+	}
+}
+
+private struct HTTPClientURLRequest: DataRequest {
+	typealias Response = Data
+
+	var url: URL?
+
+	var method: HTTPMethod { .get }
+
+	init(url: URL?) {
+		self.url = url
+	}
+
+	func decode(_ data: Data) throws -> Data {
+		data
 	}
 }
