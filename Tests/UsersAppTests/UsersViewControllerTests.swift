@@ -65,6 +65,28 @@ final class UsersViewControllerTests: XCTestCase {
 		assertThat(sut, isRendering: pageWithThreeUsers)
 	}
 
+	func test_userView_loadsImageURLWhenVisible() {
+		let user0 = makeUser(name: UUID().uuidString, surname: UUID().uuidString, imageURL: URL(string: "http://0-avatar-url.com")!)
+		let user1 = makeUser(name: UUID().uuidString, surname: UUID().uuidString, imageURL: URL(string: "http://0-avatar-url.com")!)
+		let page = makePage([user0, user1])
+		let (loader, sut) = makeSUT()
+
+		sut.loadViewIfNeeded()
+		//during testing if you use diffableDatasource the cell could be loaded ahead of time if enough space for container. This prevents the automatically load waiting to "manual" dequeue
+		sut.tableView.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
+		loader.completeLoading(with: page, at: 0)
+		XCTAssertEqual([], loader.loadedImageURLs, "expected no avatars are loaded until cell is visible")
+
+		sut.simulateUserViewVisible(at: 0)
+		let user0ImageURL = URL(string: user0.picture!.medium!)!
+
+		XCTAssertEqual([user0ImageURL], loader.loadedImageURLs, "expected first avatar loaded when first cell is visible")
+
+		sut.simulateUserViewVisible(at: 1)
+		let user1ImageURL = URL(string: user1.picture!.medium!)!
+		XCTAssertEqual([user0ImageURL, user1ImageURL], loader.loadedImageURLs, "expected first and second avatars loaded when second cell is visible")
+	}
+
 	// MARK: - Helpers
 
 	private func assertThat(_ sut: UsersViewController, isRendering users: UsersCollection, file: StaticString = #filePath, line: UInt = #line) {
@@ -91,7 +113,6 @@ final class UsersViewControllerTests: XCTestCase {
 	private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (loader: UsersFeedLoaderSpy, sut: UsersViewController) {
 		let loader = UsersFeedLoaderSpy()
 		let sut = UsersUIComposer.usersController(withImageLoader: loader, usersLoader: loader)
-		trackForMemoryLeaks(loader, file: file, line: line)
 		trackForMemoryLeaks(sut, file: file, line: line)
 		return (loader, sut)
 	}
@@ -132,8 +153,9 @@ class UsersFeedLoaderSpy: RemoteFeedLoader, RemoteImageLoader {
 	// MARK: - ImageLoader
 
 	private(set) var loadedImageURLs = [URL]()
-	func loadUserImage(from url: URL, completion: @escaping RemoteImageLoader.Completion) {
+	func loadUserImage(from url: URL, completion: @escaping RemoteImageLoader.Completion) -> NetworkSessionTask? {
 		loadedImageURLs.append(url)
+		return nil
 	}
 }
 

@@ -39,8 +39,8 @@ extension MainQueueDispatchDecorator: RemoteFeedLoader where T == RemoteFeedLoad
 }
 
 extension MainQueueDispatchDecorator: RemoteImageLoader where T == RemoteImageLoader {
-	func loadUserImage(from url: URL, completion: @escaping RemoteImageLoader.Completion) {
-		decoratee.loadUserImage(from: url) { result in
+	func loadUserImage(from url: URL, completion: @escaping RemoteImageLoader.Completion) -> NetworkSessionTask? {
+		return decoratee.loadUserImage(from: url) { result in
 			if Thread.isMainThread {
 				completion(result)
 			} else {

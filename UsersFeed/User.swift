@@ -19,9 +19,9 @@ public class Users: Codable {
 // MARK: - Result
 public class User: Codable {
 	public let name: Name?
-	let email: String?
+	public let email: String?
 	let id: ID?
-	let picture: Picture?
+	public let picture: Picture?
 
 	public init(name: Name?, email: String?, id: ID?, picture: Picture?) {
 		self.name = name
@@ -54,7 +54,7 @@ public class Name: Codable {
 
 // MARK: - Picture
 public class Picture: Codable {
-	let large, medium, thumbnail: String?
+	public let large, medium, thumbnail: String?
 
 	public init(large: String?, medium: String?, thumbnail: String?) {
 		self.large = large

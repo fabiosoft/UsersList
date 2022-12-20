@@ -13,8 +13,15 @@ public enum NetworkError: Error {
 	case malformedData
 }
 
+public protocol NetworkSessionTask {
+	func cancel()
+}
+
+extension URLSessionDataTask: NetworkSessionTask {}
+
 public protocol HTTPClient {
-	func request<Request: DataRequest>(_ request: Request, completion: @escaping (Result<(Request.Response, HTTPURLResponse), NetworkError>) -> Void)
+	@discardableResult
+	func request<Request: DataRequest>(_ request: Request, completion: @escaping (Result<(Request.Response, HTTPURLResponse), NetworkError>) -> Void) -> NetworkSessionTask?
 }
 
 final public class NetworkService: HTTPClient {
@@ -24,9 +31,10 @@ final public class NetworkService: HTTPClient {
 		self.session = session
 	}
 
-	public func request<Request: DataRequest>(_ request: Request, completion: @escaping (Result<(Request.Response, HTTPURLResponse), NetworkError>) -> Void) {
+	public func request<Request: DataRequest>(_ request: Request, completion: @escaping (Result<(Request.Response, HTTPURLResponse), NetworkError>) -> Void) -> NetworkSessionTask? {
 		guard let urlRequest = request.urlRequest else {
-			return completion(.failure(.malformedURL))
+			completion(.failure(.malformedURL))
+			return nil
 		}
 
 		let task = session.dataTask(with: urlRequest) { (data, response, error) in
@@ -50,6 +58,7 @@ final public class NetworkService: HTTPClient {
 			}
 		}
 		task.resume()
+		return task
 	}
 }
 

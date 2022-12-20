@@ -29,15 +29,8 @@ public final class UsersViewController: UITableViewController {
 	public func cellProvider(_ tableView: UITableView, _ indexPath: IndexPath, _ itemIdentifier: UserViewModel) -> UITableViewCell? {
 		let cell = tableView.dequeueReusableCell(
 			withIdentifier: UserCell.reuseIdentifier, for: indexPath) as! UserCell
+		cell.imageLoader = self.imageLoader
 		cell.model = itemIdentifier
-		if let imageURL = itemIdentifier.imageURL {
-			self.imageLoader?.loadUserImage(from: imageURL, completion: { [weak self] result in
-				guard self != nil else { return }
-				if let imageData = try? result.get() {
-					cell.imageView?.image = UIImage(data: imageData)
-				}
-			})
-		}
 		return cell
 	}
 

@@ -17,11 +17,27 @@ protocol Reusable: NSObject {
 
 class UserCell: UITableViewCell, Reusable {
 	static var reuseIdentifier: String = "UserCell"
+	private var imageTask: NetworkSessionTask?
 	var imageLoader: RemoteImageLoader?
 
 	var model: UserViewModel? {
 		didSet {
+			self.imageView?.contentMode = .scaleAspectFit
 			self.textLabel?.text = model?.name
+
+			if let imageURL = model?.imageURL {
+				self.imageTask = self.imageLoader?.loadUserImage(from: imageURL, completion: { [weak self] result in
+					guard self != nil else { return }
+					if let imageData = try? result.get() {
+						self?.imageView?.image = UIImage(data: imageData)
+					}
+				})
+			}
 		}
+	}
+
+	override func prepareForReuse() {
+		super.prepareForReuse()
+		self.imageTask?.cancel()
 	}
 }

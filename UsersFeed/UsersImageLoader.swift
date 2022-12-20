@@ -11,7 +11,7 @@ public protocol RemoteImageLoader {
 	typealias Result = Swift.Result<Data, Error>
 	typealias Completion = (Result) -> Void
 
-	func loadUserImage(from url: URL, completion: @escaping Completion)
+	func loadUserImage(from url: URL, completion: @escaping Completion) -> NetworkSessionTask?
 }
 
 public final class UsersImageLoader: RemoteImageLoader {
@@ -26,9 +26,9 @@ public final class UsersImageLoader: RemoteImageLoader {
 		self.client = client
 	}
 
-	public func loadUserImage(from url: URL, completion: @escaping Completion) {
+	public func loadUserImage(from url: URL, completion: @escaping Completion) -> NetworkSessionTask? {
 		let imageLoaderRequest = LoadUserImageRequest(url: url)
-		client.request(imageLoaderRequest) { [weak self] result in
+		return client.request(imageLoaderRequest) { [weak self] result in
 			guard let self = self else { return }
 			switch result {
 			case let .success((imageData, response)):
