@@ -15,6 +15,9 @@
 		E5B938B429524780005B434E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B938B229524780005B434E /* LaunchScreen.storyboard */; };
 		E5B938BF29524781005B434E /* UsersListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938BE29524781005B434E /* UsersListTests.swift */; };
 		E5B938DB29524B70005B434E /* UsersListE2ETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938D929524B35005B434E /* UsersListE2ETests.swift */; };
+		E5B938DF29524C46005B434E /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938DE29524C46005B434E /* DataRequest.swift */; };
+		E5B938E129524C89005B434E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938E029524C89005B434E /* NetworkService.swift */; };
+		E5B938E429524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B938E329524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		E5B938BE29524781005B434E /* UsersListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListTests.swift; sourceTree = "<group>"; };
 		E5B938C429524781005B434E /* UsersListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsersListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B938D929524B35005B434E /* UsersListE2ETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListE2ETests.swift; sourceTree = "<group>"; };
+		E5B938DE29524C46005B434E /* DataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequest.swift; sourceTree = "<group>"; };
+		E5B938E029524C89005B434E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		E5B938E329524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +83,9 @@
 		E5B9389B2952477D005B434E = {
 			isa = PBXGroup;
 			children = (
+				E5B938DD29524C24005B434E /* Network */,
 				E5B938A62952477D005B434E /* UsersList */,
-				E5B938D829524B13005B434E /* UsersListE2ETests */,
-				E5B938BD29524781005B434E /* UsersListTests */,
+				E5B938DC29524BC6005B434E /* Tests */,
 				E5B938A52952477D005B434E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -122,6 +128,33 @@
 				E5B938D929524B35005B434E /* UsersListE2ETests.swift */,
 			);
 			path = UsersListE2ETests;
+			sourceTree = "<group>";
+		};
+		E5B938DC29524BC6005B434E /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E5B938E229524CCA005B434E /* Helpers */,
+				E5B938D829524B13005B434E /* UsersListE2ETests */,
+				E5B938BD29524781005B434E /* UsersListTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		E5B938DD29524C24005B434E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E5B938DE29524C46005B434E /* DataRequest.swift */,
+				E5B938E029524C89005B434E /* NetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E5B938E229524CCA005B434E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E5B938E329524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,9 +310,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5B938E129524C89005B434E /* NetworkService.swift in Sources */,
 				E5B938AC2952477D005B434E /* ViewController.swift in Sources */,
 				E5B938A82952477D005B434E /* AppDelegate.swift in Sources */,
 				E5B938AA2952477D005B434E /* SceneDelegate.swift in Sources */,
+				E5B938DF29524C46005B434E /* DataRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +324,7 @@
 			files = (
 				E5B938BF29524781005B434E /* UsersListTests.swift in Sources */,
 				E5B938DB29524B70005B434E /* UsersListE2ETests.swift in Sources */,
+				E5B938E429524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
