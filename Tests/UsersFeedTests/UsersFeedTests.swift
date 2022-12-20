@@ -31,6 +31,28 @@ final class UsersFeedTests: XCTestCase {
 		wait(for: [exp], timeout: 1.0)
 	}
 
+	func test_loader_deliversSuccessWithoutCountriesOn200HTTPResponseWithEmptyJSON() {
+		let (_, sut) = makeSUT()
+
+		let exp = XCTestExpectation()
+
+		FeedLoaderMockURLProtocol.loadingHandler = { request in
+			let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+			return (response, Data([]), nil)
+		}
+
+		sut.loadUsers { result in
+			switch result {
+			case .success(let coutries):
+				XCTAssertEqual(coutries.count, 0)
+			case .failure(let error):
+				XCTFail("200 request failed with error \(error)")
+			}
+			exp.fulfill()
+		}
+		wait(for: [exp], timeout: 1.0)
+	}
+
 	// MARK: - Helpers
 
 	private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (client: HTTPClient, sut: UsersLoader) {
