@@ -22,6 +22,7 @@ public class UserCell: UITableViewCell, Reusable {
 
 	public lazy var userImageView: UIImageView = {
 		let img = UIImageView()
+		img.backgroundColor = .systemGray
 		img.widthAnchor.constraint(equalToConstant: 60).isActive = true
 		let heightAnchor = img.heightAnchor.constraint(equalToConstant: 60)
 		heightAnchor.priority = .defaultHigh

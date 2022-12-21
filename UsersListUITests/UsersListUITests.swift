@@ -16,10 +16,20 @@ final class UsersListUITests: XCTestCase {
 		assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "EMPTY_FEED_dark")
 	}
 
+	func test_displayedSomeCountries() {
+		let sut = makeSUT([
+			User(name: Name(title: "Mr.", first: "Foo", last: "Bar"), email: "foo.bar@email.com", id: nil, picture: nil),
+			User(name: Name(title: "Ms.", first: "Boo", last: "Beep"), email: "boo.beep@email.com", id: nil, picture: nil)
+		])
+
+		assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "USERS_FEED_light")
+		assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "USERS_FEED_dark")
+	}
+
 	// MARK: - Helpers
 
-	private func makeSUT() -> UsersViewController {
-		let loader = AlwaysSucceedingFeedLoader()
+	private func makeSUT(_ users: UsersCollection = []) -> UsersViewController {
+		let loader = AlwaysSucceedingFeedLoader(users)
 		let sut = UsersUIComposer.usersController(withImageLoader: loader, usersLoader: loader)
 		sut.loadViewIfNeeded()
 		sut.tableView.showsVerticalScrollIndicator = false
@@ -32,13 +42,18 @@ final class UsersListUITests: XCTestCase {
 	}
 
 	private class AlwaysSucceedingFeedLoader: RemoteFeedLoader, RemoteImageLoader {
+		let users: UsersCollection
+		internal init(_ users: UsersCollection) {
+			self.users = users
+		}
+
 		func loadUserImage(from url: URL, completion: @escaping RemoteImageLoader.Completion) -> NetworkSessionTask? {
 			completion(.success(Data()))
 			return nil
 		}
 
 		func loadUsers(page: UInt, completion: @escaping RemoteFeedLoader.Completion) {
-			completion(.success([]))
+			completion(.success(users))
 		}
 	}
 }
