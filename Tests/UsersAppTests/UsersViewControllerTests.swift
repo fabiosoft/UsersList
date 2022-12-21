@@ -9,7 +9,7 @@ import XCTest
 import UsersList
 
 final class UsersViewControllerTests: XCTestCase {
-	func test_countriesFeed_hasTitle() {
+	func test_usersFeed_hasTitle() {
 		let (_, sut) = makeSUT()
 		sut.loadViewIfNeeded()
 		XCTAssertEqual(sut.title, localized("FEED_VIEW_TITLE"))

@@ -1,4 +1,4 @@
-# RestCountries
+# UsersList
 
 <img src="restful_users.png" title="" alt="" data-align="center">
 

@@ -16,7 +16,7 @@ final class UsersListUITests: XCTestCase {
 		assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "EMPTY_FEED_dark")
 	}
 
-	func test_displayedSomeCountries() {
+	func test_displayedSomeUsers() {
 		let sut = makeSUT([
 			User(name: Name(title: "Mr.", first: "Foo", last: "Bar"), email: "foo.bar@email.com", id: nil, picture: nil),
 			User(name: Name(title: "Ms.", first: "Boo", last: "Beep"), email: "boo.beep@email.com", id: nil, picture: nil)
