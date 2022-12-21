@@ -9,6 +9,12 @@ import XCTest
 import UsersList
 
 final class UsersViewControllerTests: XCTestCase {
+	func test_countriesFeed_hasTitle() {
+		let (_, sut) = makeSUT()
+		sut.loadViewIfNeeded()
+		XCTAssertEqual(sut.title, "Users")
+	}
+
 	func test_loadUsers_requestUsersToLoader() {
 		let (loader, sut) = makeSUT()
 		XCTAssertEqual(0, loader.loadFeedCallCount, "expected no service loading before the view is loaded into memory")

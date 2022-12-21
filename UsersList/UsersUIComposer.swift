@@ -14,6 +14,7 @@ public final class UsersUIComposer {
 		let usersFeedVC = UsersViewController()
 		usersFeedVC.imageLoader = MainQueueDispatchDecorator(decoratee: withImageLoader)
 		usersFeedVC.usersLoader = MainQueueDispatchDecorator(decoratee: usersLoader)
+		usersFeedVC.title = UsersViewModel.title
 		return usersFeedVC
 	}
 }
