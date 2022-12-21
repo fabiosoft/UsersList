@@ -61,7 +61,7 @@ public struct LoadUsersRequest: DataRequest {
 	public let page: UInt
 	public let perPage: UInt
 	public let seed: String
-	init(page: UInt, perPage: UInt = 10, seed: String = "usersList") {
+	init(page: UInt, perPage: UInt = 20, seed: String = "usersList") {
 		self.page = page
 		self.perPage = perPage
 		self.seed = seed

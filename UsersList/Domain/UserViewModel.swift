@@ -13,8 +13,10 @@ public enum UsersFeedSection {
 
 public struct UserViewModel {
 	private let user: User
+	private let uniqueIdentifier: UUID
 	public init(user: User) {
 		self.user = user
+		self.uniqueIdentifier = UUID()
 	}
 
 	public var name: String? {
@@ -38,10 +40,10 @@ public struct UserViewModel {
 
 extension UserViewModel: Hashable {
 	public static func == (lhs: UserViewModel, rhs: UserViewModel) -> Bool {
-		lhs.user.name?.first == rhs.user.name?.first
+		lhs.uniqueIdentifier == rhs.uniqueIdentifier
 	}
 
 	public func hash(into hasher: inout Hasher) {
-		hasher.combine(user.name?.first)
+		hasher.combine(uniqueIdentifier)
 	}
 }
