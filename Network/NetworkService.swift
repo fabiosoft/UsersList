@@ -7,24 +7,7 @@
 
 import Foundation
 
-public enum NetworkError: Error {
-	case networkError
-	case malformedURL
-	case malformedData
-}
-
-public protocol NetworkSessionTask {
-	func cancel()
-}
-
-extension URLSessionDataTask: NetworkSessionTask {}
-
-public protocol HTTPClient {
-	@discardableResult
-	func request<Request: DataRequest>(_ request: Request, completion: @escaping (Result<(Request.Response, HTTPURLResponse), NetworkError>) -> Void) -> NetworkSessionTask?
-}
-
-final public class NetworkService: HTTPClient {
+final public class NetworkService: HTTPClient { // a.k.a URLSessionHTTPClient
 	private var session: URLSession
 
 	public init(session: URLSession = URLSession.shared) {
@@ -59,21 +42,5 @@ final public class NetworkService: HTTPClient {
 		}
 		task.resume()
 		return task
-	}
-}
-
-private struct HTTPClientURLRequest: DataRequest {
-	typealias Response = Data
-
-	var url: URL?
-
-	var method: HTTPMethod { .get }
-
-	init(url: URL?) {
-		self.url = url
-	}
-
-	func decode(_ data: Data) throws -> Data {
-		data
 	}
 }

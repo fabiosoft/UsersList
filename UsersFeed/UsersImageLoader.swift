@@ -7,13 +7,6 @@
 
 import Foundation
 
-public protocol RemoteImageLoader {
-	typealias Result = Swift.Result<Data, Error>
-	typealias Completion = (Result) -> Void
-
-	func loadUserImage(from url: URL, completion: @escaping Completion) -> NetworkSessionTask?
-}
-
 public final class UsersImageLoader: RemoteImageLoader {
 	private let client: HTTPClient
 
@@ -32,6 +25,7 @@ public final class UsersImageLoader: RemoteImageLoader {
 			guard let self = self else { return }
 			switch result {
 			case let .success((imageData, response)):
+				//improvement could be caching images
 				completion(self.map(imageData, and: response))
 			case let .failure(error):
 				completion(.failure(error))
@@ -45,30 +39,5 @@ public final class UsersImageLoader: RemoteImageLoader {
 		}
 
 		return .success(data)
-	}
-}
-
-public struct LoadUserImageRequest: DataRequest {
-	public typealias Response = Data
-
-	public var url: URL?
-	public var headers: [String: String] { [:] }
-	public var queryItems: [String: String] { [:] }
-
-	public var urlRequest: URLRequest? {
-		guard let url = url else {
-			return nil
-		}
-		return URLRequest(url: url)
-	}
-
-	public var method: HTTPMethod { .get }
-
-	public func decode(_ data: Data) throws -> Response {
-		data
-	}
-
-	init(url: URL? = nil) {
-		self.url = url
 	}
 }

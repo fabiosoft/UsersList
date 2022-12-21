@@ -8,13 +8,6 @@
 import Foundation
 import UIKit
 
-protocol Reusable: NSObject {
-	static var reuseIdentifier: String { get }
-
-	associatedtype DataType
-	var model: DataType? { get set }
-}
-
 public class UserCell: UITableViewCell, Reusable {
 	static var reuseIdentifier: String = "UserCell"
 	private var imageTask: NetworkSessionTask?

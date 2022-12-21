@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		E51B40342953162100D1657B /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = E51B40362953162100D1657B /* Feed.strings */; };
 		E51B403A29531C8B00D1657B /* FeedLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B403829531C8700D1657B /* FeedLocalizationTests.swift */; };
+		E51B4040295321DB00D1657B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B403F295321DB00D1657B /* MainCoordinator.swift */; };
+		E51B40422953222E00D1657B /* MainQueueDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B40412953222E00D1657B /* MainQueueDispatch.swift */; };
+		E51B40442953225C00D1657B /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B40432953225C00D1657B /* Reusable.swift */; };
+		E51B4046295322E400D1657B /* RemoteImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B4045295322E400D1657B /* RemoteImageLoader.swift */; };
+		E51B40482953232100D1657B /* LoadUserImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B40472953232100D1657B /* LoadUserImageRequest.swift */; };
+		E51B404A2953235600D1657B /* RemoteFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B40492953235600D1657B /* RemoteFeedLoader.swift */; };
+		E51B404C2953238800D1657B /* LoadUsersRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B404B2953238800D1657B /* LoadUsersRequest.swift */; };
+		E51B404E295324DC00D1657B /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B404D295324DC00D1657B /* HTTPClient.swift */; };
 		E5621C8F295279B5002913E3 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5621C8E295279B4002913E3 /* Coordinator.swift */; };
 		E5621C972952824B002913E3 /* UsersListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5621C962952824B002913E3 /* UsersListUITests.swift */; };
 		E5621C9F295282FF002913E3 /* UIViewController+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5621C9E295282FF002913E3 /* UIViewController+Snapshot.swift */; };
@@ -65,6 +73,14 @@
 		E51B403829531C8700D1657B /* FeedLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLocalizationTests.swift; sourceTree = "<group>"; };
 		E51B403C29531DCD00D1657B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E51B403D29531E4500D1657B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E51B403F295321DB00D1657B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		E51B40412953222E00D1657B /* MainQueueDispatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatch.swift; sourceTree = "<group>"; };
+		E51B40432953225C00D1657B /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		E51B4045295322E400D1657B /* RemoteImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageLoader.swift; sourceTree = "<group>"; };
+		E51B40472953232100D1657B /* LoadUserImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserImageRequest.swift; sourceTree = "<group>"; };
+		E51B40492953235600D1657B /* RemoteFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoader.swift; sourceTree = "<group>"; };
+		E51B404B2953238800D1657B /* LoadUsersRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUsersRequest.swift; sourceTree = "<group>"; };
+		E51B404D295324DC00D1657B /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		E5621C8E295279B4002913E3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E5621C942952824B002913E3 /* UsersListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsersListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5621C962952824B002913E3 /* UsersListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListUITests.swift; sourceTree = "<group>"; };
@@ -126,10 +142,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E51B403E2953214300D1657B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E5B9390B295269C1005B434E /* UserCell.swift */,
+				E51B40432953225C00D1657B /* Reusable.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E5621C8D295279A8002913E3 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
 				E5621C8E295279B4002913E3 /* Coordinator.swift */,
+				E51B403F295321DB00D1657B /* MainCoordinator.swift */,
+				E51B40412953222E00D1657B /* MainQueueDispatch.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -155,8 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				E51B403D29531E4500D1657B /* README.md */,
-				E5B938E629525157005B434E /* UsersFeed */,
 				E5B938DD29524C24005B434E /* Network */,
+				E5B938E629525157005B434E /* UsersFeed */,
 				E5B938A62952477D005B434E /* UsersList */,
 				E5B938DC29524BC6005B434E /* Tests */,
 				E5621C952952824B002913E3 /* UsersListUITests */,
@@ -178,6 +205,7 @@
 		E5B938A62952477D005B434E /* UsersList */ = {
 			isa = PBXGroup;
 			children = (
+				E51B403E2953214300D1657B /* View */,
 				E5621C8D295279A8002913E3 /* Navigation */,
 				E5B9390D29526AF9005B434E /* Domain */,
 				E5B938A72952477D005B434E /* AppDelegate.swift */,
@@ -186,7 +214,6 @@
 				E5B938B529524780005B434E /* Info.plist */,
 				E5B939072952665F005B434E /* UsersViewController.swift */,
 				E5B93909295266B3005B434E /* UsersUIComposer.swift */,
-				E5B9390B295269C1005B434E /* UserCell.swift */,
 				E51B40362953162100D1657B /* Feed.strings */,
 			);
 			path = UsersList;
@@ -225,6 +252,7 @@
 			children = (
 				E5B938DE29524C46005B434E /* DataRequest.swift */,
 				E5B938E029524C89005B434E /* NetworkService.swift */,
+				E51B404D295324DC00D1657B /* HTTPClient.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -243,6 +271,10 @@
 				E5B938E82952518D005B434E /* UsersLoader.swift */,
 				E5B938EA29525266005B434E /* User.swift */,
 				E5B939022952644B005B434E /* UsersImageLoader.swift */,
+				E51B4045295322E400D1657B /* RemoteImageLoader.swift */,
+				E51B40472953232100D1657B /* LoadUserImageRequest.swift */,
+				E51B40492953235600D1657B /* RemoteFeedLoader.swift */,
+				E51B404B2953238800D1657B /* LoadUsersRequest.swift */,
 			);
 			path = UsersFeed;
 			sourceTree = "<group>";
@@ -473,11 +505,19 @@
 				E5B938E129524C89005B434E /* NetworkService.swift in Sources */,
 				E5B938E92952518D005B434E /* UsersLoader.swift in Sources */,
 				E5B938A82952477D005B434E /* AppDelegate.swift in Sources */,
+				E51B404E295324DC00D1657B /* HTTPClient.swift in Sources */,
 				E5B939032952644B005B434E /* UsersImageLoader.swift in Sources */,
+				E51B404C2953238800D1657B /* LoadUsersRequest.swift in Sources */,
 				E5621C8F295279B5002913E3 /* Coordinator.swift in Sources */,
+				E51B4046295322E400D1657B /* RemoteImageLoader.swift in Sources */,
 				E5B938DF29524C46005B434E /* DataRequest.swift in Sources */,
+				E51B404A2953235600D1657B /* RemoteFeedLoader.swift in Sources */,
+				E51B40442953225C00D1657B /* Reusable.swift in Sources */,
 				E5B939082952665F005B434E /* UsersViewController.swift in Sources */,
+				E51B4040295321DB00D1657B /* MainCoordinator.swift in Sources */,
+				E51B40482953232100D1657B /* LoadUserImageRequest.swift in Sources */,
 				E5B9390C295269C1005B434E /* UserCell.swift in Sources */,
+				E51B40422953222E00D1657B /* MainQueueDispatch.swift in Sources */,
 				E5B938EB29525266005B434E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
