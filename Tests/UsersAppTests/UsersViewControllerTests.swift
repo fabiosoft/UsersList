@@ -12,7 +12,7 @@ final class UsersViewControllerTests: XCTestCase {
 	func test_countriesFeed_hasTitle() {
 		let (_, sut) = makeSUT()
 		sut.loadViewIfNeeded()
-		XCTAssertEqual(sut.title, "Users")
+		XCTAssertEqual(sut.title, localized("FEED_VIEW_TITLE"))
 	}
 
 	func test_loadUsers_requestUsersToLoader() {
@@ -163,6 +163,18 @@ class UsersFeedLoaderSpy: RemoteFeedLoader, RemoteImageLoader {
 	func loadUserImage(from url: URL, completion: @escaping RemoteImageLoader.Completion) -> NetworkSessionTask? {
 		loadedImageURLs.append(url)
 		return nil
+	}
+}
+
+private extension UsersViewControllerTests {
+	func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
+		let table = "Feed"
+		let bundle = Bundle(for: UsersViewController.self)
+		let value = bundle.localizedString(forKey: key, value: nil, table: table)
+		if value == key {
+			XCTFail("Missing localized string for key: \(key) in table: \(table)", file: file, line: line)
+		}
+		return value
 	}
 }
 

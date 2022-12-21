@@ -11,6 +11,9 @@ public class UsersViewModel {
 	private init() {}
 
 	static var title: String {
-		"Users"
+		NSLocalizedString("FEED_VIEW_TITLE",
+		                  tableName: "Feed",
+		                  bundle: Bundle(for: UsersViewModel.self),
+		                  comment: "")
 	}
 }
