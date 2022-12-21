@@ -15,7 +15,7 @@ public protocol RemoteFeedLoader {
 	func map(_ usersCollection: UsersCollection) -> [UserViewModel]
 }
 
-extension RemoteFeedLoader {
+public extension RemoteFeedLoader {
 	func map(_ collection: UsersCollection) -> [UserViewModel] {
 		collection.map(UserViewModel.init)
 	}

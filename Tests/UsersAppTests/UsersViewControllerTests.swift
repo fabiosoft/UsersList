@@ -99,7 +99,7 @@ final class UsersViewControllerTests: XCTestCase {
 			let surname = user.name?.last
 			let completeName = "\(name!) \(surname!)"
 			XCTAssertEqual(completeName, view?.userName, "expected view controller to configure cell with \(completeName), got \(view?.userName ?? "") instead", file: file, line: line)
-            XCTAssertEqual(user.email, view?.email, "expected view controller to configure cell with \(String(describing: user.email)), got \(view?.email ?? "") instead", file: file, line: line)
+			XCTAssertEqual(user.email, view?.email, "expected view controller to configure cell with \(String(describing: user.email)), got \(view?.email ?? "") instead", file: file, line: line)
 		}
 	}
 
