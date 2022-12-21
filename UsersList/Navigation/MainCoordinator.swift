@@ -22,7 +22,7 @@ class MainCoordinator: Coordinator {
 	}
 
 	private func feedUsersVC() -> UsersViewController {
-		let session = URLSession(configuration: .ephemeral)
+        let session = URLSession(configuration: .ephemeral, delegate: nil /*SSLPinningManager()*/, delegateQueue: nil)
 		let service = NetworkService(session: session)
 		let imageLoader = UsersImageLoader(client: service)
 		let usersLoader = UsersLoader(service)
