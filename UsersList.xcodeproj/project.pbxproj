@@ -64,6 +64,7 @@
 		E51B40372953162300D1657B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Feed.strings; sourceTree = "<group>"; };
 		E51B403829531C8700D1657B /* FeedLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLocalizationTests.swift; sourceTree = "<group>"; };
 		E51B403C29531DCD00D1657B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		E51B403D29531E4500D1657B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E5621C8E295279B4002913E3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E5621C942952824B002913E3 /* UsersListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsersListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5621C962952824B002913E3 /* UsersListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListUITests.swift; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 		E5B9389B2952477D005B434E = {
 			isa = PBXGroup;
 			children = (
+				E51B403D29531E4500D1657B /* README.md */,
 				E5B938E629525157005B434E /* UsersFeed */,
 				E5B938DD29524C24005B434E /* Network */,
 				E5B938A62952477D005B434E /* UsersList */,
