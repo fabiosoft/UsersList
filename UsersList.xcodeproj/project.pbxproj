@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E51B40342953162100D1657B /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = E51B40362953162100D1657B /* Feed.strings */; };
+		E51B403A29531C8B00D1657B /* FeedLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B403829531C8700D1657B /* FeedLocalizationTests.swift */; };
 		E5621C8F295279B5002913E3 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5621C8E295279B4002913E3 /* Coordinator.swift */; };
 		E5621C972952824B002913E3 /* UsersListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5621C962952824B002913E3 /* UsersListUITests.swift */; };
 		E5621C9F295282FF002913E3 /* UIViewController+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5621C9E295282FF002913E3 /* UIViewController+Snapshot.swift */; };
@@ -61,6 +62,8 @@
 		E51B4031295315CC00D1657B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E51B40352953162100D1657B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Feed.strings; sourceTree = "<group>"; };
 		E51B40372953162300D1657B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Feed.strings; sourceTree = "<group>"; };
+		E51B403829531C8700D1657B /* FeedLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLocalizationTests.swift; sourceTree = "<group>"; };
+		E51B403C29531DCD00D1657B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E5621C8E295279B4002913E3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E5621C942952824B002913E3 /* UsersListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsersListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5621C962952824B002913E3 /* UsersListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListUITests.swift; sourceTree = "<group>"; };
@@ -255,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				E5B9390529526577005B434E /* UsersViewControllerTests.swift */,
+				E51B403829531C8700D1657B /* FeedLocalizationTests.swift */,
 			);
 			path = UsersAppTests;
 			sourceTree = "<group>";
@@ -482,6 +486,7 @@
 			files = (
 				E5B9390129525E47005B434E /* FeedLoaderMockURLProtocol.swift in Sources */,
 				E5B9390629526577005B434E /* UsersViewControllerTests.swift in Sources */,
+				E51B403A29531C8B00D1657B /* FeedLocalizationTests.swift in Sources */,
 				E5B938BF29524781005B434E /* UsersListTests.swift in Sources */,
 				E5B938EE295256EC005B434E /* UsersFeedTests.swift in Sources */,
 				E5B938E429524CE7005B434E /* XCTestCase+MemoryLeakTracking.swift in Sources */,
@@ -532,6 +537,7 @@
 			children = (
 				E5B938B329524780005B434E /* Base */,
 				E51B4031295315CC00D1657B /* it */,
+				E51B403C29531DCD00D1657B /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
