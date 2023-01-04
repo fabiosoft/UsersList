@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Reusable: NSObject {
+protocol Reusable {
 	static var reuseIdentifier: String { get }
 
 	associatedtype DataType
