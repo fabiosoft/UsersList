@@ -11,6 +11,7 @@ public final class UsersViewController: UITableViewController {
 	public typealias UsersDataSource = UITableViewDiffableDataSource<UsersFeedSection, UserViewModel>
 	public typealias UsersSnapshot = NSDiffableDataSourceSnapshot<UsersFeedSection, UserViewModel>
 
+	private var onViewIsAppearing: ((UsersViewController) -> Void)?
 	var didSelect: ((UserViewModel) -> Void)?
 	var imageLoader: RemoteImageLoader?
 	var usersLoader: RemoteFeedLoader?
@@ -20,11 +21,18 @@ public final class UsersViewController: UITableViewController {
 
 	public lazy var diffDataSource = makeDataSource()
 
-	public let pullRefreshControl = UIRefreshControl()
 	public override func viewDidLoad() {
 		super.viewDidLoad()
 		setupViews()
-		load()
+		onViewIsAppearing = { [weak self] vc in
+			self?.load()
+			vc.onViewIsAppearing = nil
+		}
+	}
+
+	public override func viewIsAppearing(_ animated: Bool) {
+		super.viewIsAppearing(animated)
+		onViewIsAppearing?(self)
 	}
 
 	public func cellProvider(_ tableView: UITableView, _ indexPath: IndexPath, _ itemIdentifier: UserViewModel) -> UITableViewCell? {
@@ -57,21 +65,21 @@ public final class UsersViewController: UITableViewController {
 	}
 
 	private func setupViews() {
-		pullRefreshControl.addTarget(self, action: #selector(load), for: .valueChanged)
-		tableView.addSubview(pullRefreshControl)
+		refreshControl = UIRefreshControl()
+		refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
 		tableView.register(UserCell.self, forCellReuseIdentifier: UserCell.reuseIdentifier)
 	}
 
 	@objc
 	private func load() {
-		pullRefreshControl.beginRefreshing()
+		refreshControl?.beginRefreshing()
 		self.loadUsers(page: 1, completion: { [weak self] result in
 			guard let self = self else { return }
 			if let users = try? result.get() {
 				self.model = users
 				self.applySnapshot(items: users.map(UserViewModel.init), animatingDifferences: true)
 			}
-			self.pullRefreshControl.endRefreshing()
+			self.refreshControl?.endRefreshing()
 		})
 	}
 

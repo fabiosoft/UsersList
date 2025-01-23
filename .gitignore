@@ -2,6 +2,8 @@
 # Edit at 
 https://www.toptal.com/developers/gitignore?templates=swift,xcode
 
+.DS_Store
+
 ### Swift ###
 # Xcode
 #

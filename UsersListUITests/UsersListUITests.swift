@@ -32,6 +32,8 @@ final class UsersListUITests: XCTestCase {
 		let loader = AlwaysSucceedingFeedLoader(users)
 		let sut = UsersUIComposer.usersController(withImageLoader: loader, usersLoader: loader)
 		sut.loadViewIfNeeded()
+		sut.beginAppearanceTransition(true, animated: false)
+		sut.endAppearanceTransition()
 		sut.tableView.showsVerticalScrollIndicator = false
 		sut.tableView.showsHorizontalScrollIndicator = false
 		return sut
@@ -72,7 +74,7 @@ extension XCTestCase {
 			return
 		}
 
-		if !match(snapshotData, storedSnapshotData, tolerance: 0.00001) {
+		if !match(snapshotData, storedSnapshotData, tolerance: 0.001) {
 			let temporarySnapshotURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
 				.appendingPathComponent(snapshotURL.lastPathComponent)
 

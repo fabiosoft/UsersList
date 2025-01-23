@@ -11,7 +11,7 @@ import UsersList
 final class UsersViewControllerTests: XCTestCase {
 	func test_usersFeed_hasTitle() {
 		let (_, sut) = makeSUT()
-		sut.loadViewIfNeeded()
+		sut.loadViewIfNeededAndAppearsTransitions()
 		XCTAssertEqual(sut.title, localized("FEED_VIEW_TITLE"))
 	}
 
@@ -19,7 +19,7 @@ final class UsersViewControllerTests: XCTestCase {
 		let (loader, sut) = makeSUT()
 		XCTAssertEqual(0, loader.loadFeedCallCount, "expected no service loading before the view is loaded into memory")
 
-		sut.loadViewIfNeeded()
+		sut.loadViewIfNeededAndAppearsTransitions()
 		XCTAssertEqual(1, loader.loadFeedCallCount, "expected loading once when the view is loaded into memory")
 
 		sut.triggerReloading()
@@ -32,7 +32,9 @@ final class UsersViewControllerTests: XCTestCase {
 	func test_loadingIndicator_isVisibleWhileLoading() {
 		let (loader, sut) = makeSUT()
 
-		sut.loadViewIfNeeded()
+		sut.replaceRefreshControlWithFakeIOS17Support()
+		sut.loadViewIfNeededAndAppearsTransitions()
+
 		XCTAssertTrue(sut.isShowingLoadingIndicator, "expected to display loading indicator while service is loading")
 
 		loader.completeLoading(at: 0)
@@ -56,7 +58,7 @@ final class UsersViewControllerTests: XCTestCase {
 
 		let (loader, sut) = makeSUT()
 
-		sut.loadViewIfNeeded()
+		sut.loadViewIfNeededAndAppearsTransitions()
 		assertThat(sut, isRendering: pageWithoutUsers)
 
 		loader.completeLoading(with: pageWithOneUser, at: 0)
@@ -77,7 +79,7 @@ final class UsersViewControllerTests: XCTestCase {
 		let page = makePage([user0, user1])
 		let (loader, sut) = makeSUT()
 
-		sut.loadViewIfNeeded()
+		sut.loadViewIfNeededAndAppearsTransitions()
 		//during testing if you use diffableDatasource the cell could be loaded ahead of time if enough space for container. This prevents the automatically load waiting to "manual" dequeue
 		sut.tableView.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
 		loader.completeLoading(with: page, at: 0)
@@ -122,6 +124,40 @@ final class UsersViewControllerTests: XCTestCase {
 		let sut = UsersUIComposer.usersController(withImageLoader: loader, usersLoader: loader)
 		trackForMemoryLeaks(sut, file: file, line: line)
 		return (loader, sut)
+	}
+}
+
+extension UsersViewController {
+	// from io17+ call viewDidLoad doesn't not assure that the VC is ready for testing porpuse, and table view diff data source doesn't respond accordingly, this make sure that all vc lifecycle is called in sequence.
+	func loadViewIfNeededAndAppearsTransitions(isAppearing: Bool = true, animated: Bool = false) {
+		loadViewIfNeeded() //viewDidLoad
+		beginAppearanceTransition(isAppearing, animated: animated) //viewWillAppear+viewIsAppearing
+		endAppearanceTransition() //commit transitions
+	}
+
+	// from io17+ UIRefreshControl is a lot hard to etst because it needs an host application to work and respond to actions. so this replaces the VC refresh control with a fake test double to mock the behaviour. note: call this before any view appearance transitions or vc lifecycle
+	func replaceRefreshControlWithFakeIOS17Support() {
+		let fake = FakeRefreshControl()
+		refreshControl?.allTargets.forEach { target in
+			refreshControl?.actions(forTarget: target, forControlEvent: .valueChanged)?.forEach { action in
+				fake.addTarget(target, action: Selector(action), for: .valueChanged)
+			}
+		}
+		refreshControl = fake
+	}
+}
+
+private class FakeRefreshControl: UIRefreshControl {
+	private var _isRefreshing: Bool = false
+
+	override var isRefreshing: Bool { _isRefreshing }
+
+	override func beginRefreshing() {
+		_isRefreshing = true
+	}
+
+	override func endRefreshing() {
+		_isRefreshing = false
 	}
 }
 
@@ -184,7 +220,7 @@ private extension UsersViewController {
 	}
 
 	func triggerReloading() {
-		pullRefreshControl.simulatePullToRefresh()
+		refreshControl?.simulatePullToRefresh()
 	}
 
 	func numberOfRenderedUsers() -> Int {
@@ -193,12 +229,14 @@ private extension UsersViewController {
 
 	func userView(at row: Int) -> UserCell? {
 		let index = IndexPath(row: row, section: 0)
-		let item = self.diffDataSource.itemIdentifier(for: index)!
+		guard let item = self.diffDataSource.itemIdentifier(for: index) else {
+			return nil
+		}
 		return self.cellProvider(tableView, index, item) as? UserCell
 	}
 
 	var isShowingLoadingIndicator: Bool {
-		return pullRefreshControl.isRefreshing == true
+		return refreshControl?.isRefreshing == true
 	}
 }
 
