@@ -8,6 +8,4 @@
 import XCTest
 @testable import UsersList
 
-final class UsersListTests: XCTestCase {
-
-}
+final class UsersListTests: XCTestCase {}
